@@ -1,0 +1,19 @@
+REFRESHCOOKIE: ""
+USERTOKENS: # 用户token,可配置多个
+  - "usesdsdsdr1assda"
+  - "usdsdsdser2"
+
+# PROXY: "http://127.0.0.1:31280"  # 代理地址
+#测试账号
+OAUTH_URL: https://www.openai-hk.com/xy/ouath/test
+#api账号
+#OAUTH_URL: https://www.openai-hk.com/xy/ouath/api
+
+database:
+  default:
+    type: "sqlite" # 数据库类型
+    name: "./config/cool.sqlite" # 数据库名称,对于sqlite来说就是数据库文件名
+    extra: busy_timeout=5000 # 扩展参数 如 busy_timeout=5000&journal_mode=ALL
+    createdAt: "create_time" # 创建时间字段名称
+    updatedAt: "update_time" # 更新时间字段名称
+    # debug: true # 开启调试模式,启用后将在控制台打印相关sql语句

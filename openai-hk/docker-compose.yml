@@ -1,0 +1,46 @@
+version: '3'
+services:
+  sse:
+    image: ydlhero/chatui:sse
+    restart: always
+    environment:
+      TZ: Asia/Shanghai # 指定时区
+      OPENAI_API_KEY: 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
+      TIMEOUT_MS: 60000
+      SSE_API_BASE_URL: https://aip.openai-sk.com
+      SSE_REDIS_URL: redis://172.17.0.1:6379
+      SSE_MQ_SERVER: amqp://mj:mj2023@172.17.0.1:5672
+      SSE_HTTP_SERVER: https://www.open-hk.com
+    ports:
+      - "4067:3002"  
+  ssebak: #备用服务器
+    image: ydlhero/chatui:sse
+    restart: always
+    environment:
+      TZ: Asia/Shanghai # 指定时区
+      OPENAI_API_KEY: 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
+      TIMEOUT_MS: 60000
+      SSE_API_BASE_URL: https://aip.openai-sk.com
+      SSE_REDIS_URL: redis://172.17.0.1:6379
+      SSE_MQ_SERVER: amqp://mj:mj2023@172.17.0.1:5672
+      SSE_HTTP_SERVER: https://www.open-hk.com
+    ports:
+      - "4066:3002" #端口变化
+  consumer: #消费程序
+    image:  ydlhero/mj-mq:consumer
+    restart: always
+    environment:
+      TZ: Asia/Shanghai # 指定时区
+      SSE_REDIS_URL: redis://172.17.0.1:6379
+      SSE_MYSQL: mysql://mq:Cikuutest2023@10.0.0.14/tool
+      SSE_MQ_SERVER: amqp://mj:mj2023@172.17.0.1:5672
+      SSE_MQ_QUERY: openapi_finish
+      SSE_CHANGE_KEY: on
+  
+#   docker rm -f consumer11 && docker run --name consumer11 --restart=always  -d \
+# --env SSE_REDIS_URL='redis://172.17.0.1:6379' \
+# --env SSE_MYSQL=mysql://mq:Cikuutest2023@10.0.0.14/tool \
+# --env SSE_MQ_SERVER=amqp://mj:mj2023@172.17.0.1:5672 \
+# --env SSE_MQ_QUERY=openapi_finish \
+# --env SSE_CHANGE_KEY=on  ydlhero/mj-mq:consumer39
+
