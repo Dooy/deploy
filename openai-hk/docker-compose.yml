@@ -35,5 +35,5 @@ services:
       SSE_MYSQL: mysql://mq:Cikuutest2023@10.0.0.14/tool
       SSE_MQ_SERVER: amqp://mj:mj2023@172.17.0.1:5672
       SSE_MQ_QUERY: openapi_finish
-      SSE_CHANGE_KEY: on
+      SSE_CHANGE_KEY: "on"
 
