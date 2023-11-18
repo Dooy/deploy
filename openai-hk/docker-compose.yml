@@ -36,11 +36,4 @@ services:
       SSE_MQ_SERVER: amqp://mj:mj2023@172.17.0.1:5672
       SSE_MQ_QUERY: openapi_finish
       SSE_CHANGE_KEY: on
-  
-#   docker rm -f consumer11 && docker run --name consumer11 --restart=always  -d \
-# --env SSE_REDIS_URL='redis://172.17.0.1:6379' \
-# --env SSE_MYSQL=mysql://mq:Cikuutest2023@10.0.0.14/tool \
-# --env SSE_MQ_SERVER=amqp://mj:mj2023@172.17.0.1:5672 \
-# --env SSE_MQ_QUERY=openapi_finish \
-# --env SSE_CHANGE_KEY=on  ydlhero/mj-mq:consumer39
 
